@@ -1,0 +1,6 @@
+{
+  "name": "Citymapper Singapore",
+  "description": "Real-time Singapore public transit routing, live LTA MRT & LRT line status, bus schedules, and interactive transit network map.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
