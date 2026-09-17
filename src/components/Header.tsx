@@ -135,6 +135,21 @@ export const Header: React.FC<HeaderProps> = ({
             <span className="material-symbols-outlined text-[22px]">star</span>
           </button>
 
+          <button
+            onClick={() => {
+              const el = document.getElementById('citymapper-feedback-footer');
+              if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+              }
+            }}
+            id="header-feedback-btn"
+            className="p-2 rounded-full hover:bg-slate-100 text-slate-600 hover:text-slate-900 transition-colors flex items-center justify-center"
+            title="Feedback & Discussion"
+            type="button"
+          >
+            <span className="material-symbols-outlined text-[22px]">forum</span>
+          </button>
+
           <div
             className="w-8 h-8 rounded-full bg-[#006e2a] flex items-center justify-center text-white cursor-pointer hover:ring-2 hover:ring-[#00c853] transition-all"
             title="User Profile: Singapore LTA Live"
@@ -186,6 +201,18 @@ export const Header: React.FC<HeaderProps> = ({
           }`}
         >
           Cycle / Walk
+        </button>
+        <button
+          onClick={() => {
+            const el = document.getElementById('citymapper-feedback-footer');
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
+          className="px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap text-slate-600 hover:text-slate-900 flex items-center gap-1"
+        >
+          <span className="material-symbols-outlined text-[14px]">forum</span>
+          <span>Feedback</span>
         </button>
       </div>
     </header>

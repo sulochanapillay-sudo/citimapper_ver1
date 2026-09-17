@@ -659,6 +659,21 @@ export const JourneyPlanner: React.FC<JourneyPlannerProps> = ({
             </div>
           </div>
         </div>
+
+        {/* Feedback Shortcut Button */}
+        <button
+          type="button"
+          onClick={() => {
+            const el = document.getElementById('citymapper-feedback-footer');
+            if (el) {
+              el.scrollIntoView({ behavior: 'smooth' });
+            }
+          }}
+          className="mt-3 w-full py-2 px-3 rounded-xl bg-white hover:bg-slate-50 border border-blue-200/80 text-xs font-semibold text-slate-700 flex items-center justify-center gap-1.5 transition-colors cursor-pointer"
+        >
+          <span className="material-symbols-outlined text-[16px] text-blue-600">forum</span>
+          <span>Community Feedback &amp; Disqus Discussion ↓</span>
+        </button>
       </div>
     </aside>
   );

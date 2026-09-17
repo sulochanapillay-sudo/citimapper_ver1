@@ -68,7 +68,7 @@ export default function App() {
       {/* Main Content Area */}
       <main className="w-full pt-16 flex-1 flex flex-col min-h-[calc(100vh-4rem)]">
         {activeTab === 'directions' && (
-          <div className="w-full h-[calc(100vh-4rem)] flex flex-col lg:flex-row overflow-hidden bg-white">
+          <div className="w-full min-h-[calc(100vh-4rem)] flex flex-col lg:flex-row bg-white">
             {/* Left Sidebar: Journey Planner, Line Status, Commutes */}
             <JourneyPlanner
               activeRoute={activeRoute}
@@ -123,8 +123,8 @@ export default function App() {
         {activeTab === 'cycle-walk' && <CycleWalkView />}
       </main>
 
-      {/* Footer (Always displayed on secondary views or bottom of page) */}
-      {activeTab !== 'directions' && <Footer />}
+      {/* Footer (Always displayed with Disqus Feedback thread) */}
+      <Footer activeTab={activeTab} />
 
       {/* City Switcher Modal */}
       <CitySwitcherModal

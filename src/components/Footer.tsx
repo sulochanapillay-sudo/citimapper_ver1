@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
+import { FeedbackFooter } from './FeedbackFooter';
 
-export const Footer: React.FC = () => {
+interface FooterProps {
+  activeTab?: string;
+}
+
+export const Footer: React.FC<FooterProps> = ({ activeTab }) => {
   const [showStatusModal, setShowStatusModal] = useState<boolean>(false);
   const [showTermsModal, setShowTermsModal] = useState<boolean>(false);
 
   return (
     <>
       <footer className="w-full bg-[#eff4ff] border-t border-slate-200" id="citymapper-footer">
-        <div className="w-full px-4 lg:px-8 py-4 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-slate-500">
+        {/* Feedback Section with Disqus Embed & SPA Reloading */}
+        <FeedbackFooter activeTab={activeTab} />
+
+        {/* Legal, Open Data Attribution, and Network Status Bar */}
+        <div className="w-full px-4 lg:px-8 py-4 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-slate-500 bg-[#eff4ff]">
           <div>
             Contains information from LTA DataMall and data.gov.sg, accessed 17 September 2026, made available under the terms of the Singapore Open Data Licence version 1.0.
           </div>
