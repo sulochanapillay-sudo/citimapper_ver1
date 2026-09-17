@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { LIVE_BUS_ARRIVALS, STATIONS } from '../data/transitData';
 import { TransitStation } from '../types';
+import { LiveHdbTrainsAndBusesPanel } from './LiveHdbTrainsAndBusesPanel';
 
 interface LiveTransitViewProps {
   onSelectStation: (station: TransitStation) => void;
@@ -90,6 +91,9 @@ export const LiveTransitView: React.FC<LiveTransitViewProps> = ({ onSelectStatio
             className="w-full pl-12 pr-4 py-3 rounded-2xl bg-white border border-slate-200 focus:outline-none focus:ring-2 focus:ring-[#00c853] text-sm text-slate-900 shadow-xs"
           />
         </div>
+
+        {/* Live Serverless Feed Panel: Free Lots at Three HDB Trains & Next Buses Outside */}
+        <LiveHdbTrainsAndBusesPanel />
 
         {/* MRT Station Departures */}
         {(selectedFilter === 'all' || selectedFilter === 'mrt') && (

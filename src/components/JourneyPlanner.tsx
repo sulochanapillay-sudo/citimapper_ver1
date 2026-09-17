@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CommuteOption, TransitLineCode, TransitStation } from '../types';
 import { MRT_LINE_STATUSES, COMMUTE_OPTIONS, POPULAR_LOCATIONS } from '../data/transitData';
+import { LiveHdbTrainsAndBusesPanel } from './LiveHdbTrainsAndBusesPanel';
 
 interface JourneyPlannerProps {
   activeRoute: CommuteOption | null;
@@ -441,6 +442,11 @@ export const JourneyPlanner: React.FC<JourneyPlannerProps> = ({
             );
           })}
         </div>
+      </div>
+
+      {/* Free Lots at Three HDB Trains & Next Buses (Serverless Feed) */}
+      <div className="px-4 lg:px-5 mb-4">
+        <LiveHdbTrainsAndBusesPanel />
       </div>
 
       {/* Suggested Route Cards Section */}
