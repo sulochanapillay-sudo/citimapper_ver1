@@ -12,8 +12,8 @@ export const Footer: React.FC<FooterProps> = ({ activeTab }) => {
   return (
     <>
       <footer className="w-full bg-[#eff4ff] border-t border-slate-200" id="citymapper-footer">
-        {/* Feedback Section with Disqus Embed & SPA Reloading (shown if not already on the dedicated Feedback tab) */}
-        {activeTab !== 'feedback' && <FeedbackFooter activeTab={activeTab} />}
+        {/* Feedback Section with Disqus Embed & SPA Reloading */}
+        <FeedbackFooter activeTab={activeTab} />
 
         {/* Legal, Open Data Attribution, and Network Status Bar */}
         <div className="w-full px-4 lg:px-8 py-4 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-slate-500 bg-[#eff4ff]">

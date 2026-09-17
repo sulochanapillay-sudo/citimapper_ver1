@@ -88,35 +88,39 @@ export const FeedbackFooter: React.FC<FeedbackFooterProps> = ({ activeTab }) => 
 
   // Function to initialize or reload Disqus in a Single Page App (SPA)
   const reloadDisqus = useCallback(() => {
-    setDisqusStatus('loading');
+    try {
+      setDisqusStatus('loading');
 
-    // Assign global Disqus parameters
-    window.disqus_shortname = 'sulochana-citymapper';
-    window.disqus_config = function () {
-      this.page = this.page || {};
-      this.page.url = FIXED_PAGE_URL;
-      this.page.identifier = FIXED_PAGE_IDENTIFIER;
-      this.page.title = 'Citymapper Singapore Community Feedback';
-    };
+      // Assign global Disqus parameters
+      window.disqus_shortname = 'sulochana-citymapper';
+      window.disqus_config = function (this: any) {
+        this.page = this.page || {};
+        this.page.url = FIXED_PAGE_URL;
+        this.page.identifier = FIXED_PAGE_IDENTIFIER;
+        this.page.title = 'Citymapper Singapore Community Feedback';
+      };
 
-    if (window.DISQUS && typeof window.DISQUS.reset === 'function') {
-      try {
-        window.DISQUS.reset({
-          reload: true,
-          config: function () {
-            this.page = this.page || {};
-            this.page.url = FIXED_PAGE_URL;
-            this.page.identifier = FIXED_PAGE_IDENTIFIER;
-            this.page.title = 'Citymapper Singapore Community Feedback';
-          },
-        });
-        setDisqusStatus('loaded');
-        setLastReloaded(new Date().toLocaleTimeString('en-SG', { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
-      } catch (err) {
-        console.warn('Disqus reset error:', err);
-        setDisqusStatus('blocked');
+      if (window.DISQUS && typeof window.DISQUS.reset === 'function') {
+        try {
+          window.DISQUS.reset({
+            reload: true,
+            config: function (this: any) {
+              this.page = this.page || {};
+              this.page.url = FIXED_PAGE_URL;
+              this.page.identifier = FIXED_PAGE_IDENTIFIER;
+              this.page.title = 'Citymapper Singapore Community Feedback';
+            },
+          });
+          setDisqusStatus('loaded');
+          setLastReloaded(new Date().toLocaleTimeString('en-SG', { hour: '2-digit', minute: '2-digit', second: '2-digit' }));
+        } catch (err) {
+          console.warn('Disqus reset error:', err);
+          setDisqusStatus('blocked');
+        }
+        return;
       }
-    } else {
+
+      // Initial script injection if not yet present
       const scriptId = 'disqus-embed-script';
       const existingScript = document.getElementById(scriptId);
 
@@ -136,12 +140,16 @@ export const FeedbackFooter: React.FC<FeedbackFooterProps> = ({ activeTab }) => 
         };
         (d.head || d.body).appendChild(s);
       } else {
-        setTimeout(() => {
+        // Script is already in DOM, check periodically if DISQUS is ready
+        let attempts = 0;
+        const checkInterval = setInterval(() => {
+          attempts += 1;
           if (window.DISQUS && typeof window.DISQUS.reset === 'function') {
+            clearInterval(checkInterval);
             try {
               window.DISQUS.reset({
                 reload: true,
-                config: function () {
+                config: function (this: any) {
                   this.page = this.page || {};
                   this.page.url = FIXED_PAGE_URL;
                   this.page.identifier = FIXED_PAGE_IDENTIFIER;
@@ -153,20 +161,25 @@ export const FeedbackFooter: React.FC<FeedbackFooterProps> = ({ activeTab }) => 
             } catch {
               setDisqusStatus('blocked');
             }
+          } else if (attempts > 10) {
+            clearInterval(checkInterval);
           }
-        }, 350);
+        }, 300);
       }
+    } catch (e) {
+      console.warn('Disqus initialization error caught:', e);
+      setDisqusStatus('blocked');
     }
   }, []);
 
-  // Reload Disqus when activeTab changes or component mounts
+  // Initialize on mount or when switching specifically to the feedback tab
   useEffect(() => {
     const timer = setTimeout(() => {
       reloadDisqus();
-    }, 120);
+    }, 200);
 
     return () => clearTimeout(timer);
-  }, [activeTab, reloadDisqus]);
+  }, [activeTab === 'feedback', reloadDisqus]);
 
   // Handle new comment submission
   const handleCommentSubmit = (e: React.FormEvent) => {

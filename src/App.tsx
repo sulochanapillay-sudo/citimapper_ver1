@@ -16,7 +16,6 @@ import {
   SavedPlacesModal,
 } from './components/Modals';
 import { Footer } from './components/Footer';
-import { FeedbackFooter } from './components/FeedbackFooter';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<NavTab>('directions');
@@ -122,7 +121,21 @@ export default function App() {
         {activeTab === 'bus-network' && <BusNetworkView />}
 
         {activeTab === 'cycle-walk' && <CycleWalkView />}
-        {activeTab === 'feedback' && <FeedbackFooter activeTab={activeTab} />}
+        {activeTab === 'feedback' && (
+          <section className="w-full bg-gradient-to-b from-[#eef5ff] to-white py-12 px-4 lg:px-8 border-b border-slate-200">
+            <div className="max-w-4xl mx-auto text-center space-y-3">
+              <div className="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#00c853]/15 text-[#006e2a] shadow-xs">
+                <span className="material-symbols-outlined text-[32px]">forum</span>
+              </div>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+                Community Feedback &amp; Discussion
+              </h1>
+              <p className="text-sm text-slate-600 max-w-xl mx-auto leading-relaxed">
+                Connect with Singapore commuters, report train and bus service delays, rate your daily transit routes, or join the discussion on Disqus below.
+              </p>
+            </div>
+          </section>
+        )}
       </main>
 
       {/* Footer (Always displayed with Disqus Feedback thread) */}

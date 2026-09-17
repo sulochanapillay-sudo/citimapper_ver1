@@ -13,6 +13,34 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+    <script>
+      // Gracefully prevent third-party cross-origin scripts (e.g. Disqus iframe sandboxes)
+      // from bubbling unhandled "Script error." events to the top window
+      window.addEventListener('error', function(event) {
+        if (event.message === 'Script error.' || (event.filename && event.filename.indexOf('disqus') !== -1)) {
+          event.preventDefault();
+          event.stopPropagation();
+          return true;
+        }
+      }, true);
+      window.onerror = function(msg, url) {
+        if (msg === 'Script error.' || (url && url.indexOf('disqus') !== -1)) {
+          return true;
+        }
+        return false;
+      };
+      window.addEventListener('unhandledrejection', function(event) {
+        if (event.reason && String(event.reason).indexOf('disqus') !== -1) {
+          event.preventDefault();
+        }
+      });
+      window.disqus_config = function () {
+        this.page = this.page || {};
+        this.page.url = 'https://sulochanapillay-sudo.github.io/citimapper_ver1/feedback';
+        this.page.identifier = 'citymapper-singapore-feedback';
+        this.page.title = 'Citymapper Singapore Community Feedback';
+      };
+    </script>
   </head>
   <body class="font-sans antialiased text-slate-800 bg-[#f8f9ff]">
     <div id="root"></div>
