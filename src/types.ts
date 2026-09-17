@@ -57,7 +57,7 @@ export interface CommuteOption {
   co2Saved?: string;
 }
 
-export type NavTab = 'directions' | 'live-transit' | 'mrt-lrt-lines' | 'bus-network' | 'cycle-walk';
+export type NavTab = 'directions' | 'live-transit' | 'mrt-lrt-lines' | 'bus-network' | 'cycle-walk' | 'feedback';
 
 export interface CityOption {
   id: string;

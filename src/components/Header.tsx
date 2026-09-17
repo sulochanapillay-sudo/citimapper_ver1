@@ -111,6 +111,17 @@ export const Header: React.FC<HeaderProps> = ({
           >
             Cycle &amp; Walk
           </button>
+          <button
+            onClick={() => onSelectTab('feedback')}
+            id="nav-tab-feedback"
+            className={`px-3.5 py-1.5 rounded-full text-xs font-bold transition-all ${
+              activeTab === 'feedback'
+                ? 'bg-[#e5eeff] text-slate-900 shadow-xs'
+                : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+            }`}
+          >
+            Feedback
+          </button>
         </nav>
 
         {/* Right Action Icons & Get App CTA */}
@@ -203,13 +214,10 @@ export const Header: React.FC<HeaderProps> = ({
           Cycle / Walk
         </button>
         <button
-          onClick={() => {
-            const el = document.getElementById('citymapper-feedback-footer');
-            if (el) {
-              el.scrollIntoView({ behavior: 'smooth' });
-            }
-          }}
-          className="px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap text-slate-600 hover:text-slate-900 flex items-center gap-1"
+          onClick={() => onSelectTab('feedback')}
+          className={`px-3 py-1 rounded-full text-xs font-bold whitespace-nowrap flex items-center gap-1 ${
+            activeTab === 'feedback' ? 'bg-[#e5eeff] text-slate-900' : 'text-slate-600'
+          }`}
         >
           <span className="material-symbols-outlined text-[14px]">forum</span>
           <span>Feedback</span>

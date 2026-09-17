@@ -16,6 +16,7 @@ import {
   SavedPlacesModal,
 } from './components/Modals';
 import { Footer } from './components/Footer';
+import { FeedbackFooter } from './components/FeedbackFooter';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<NavTab>('directions');
@@ -121,6 +122,7 @@ export default function App() {
         {activeTab === 'bus-network' && <BusNetworkView />}
 
         {activeTab === 'cycle-walk' && <CycleWalkView />}
+        {activeTab === 'feedback' && <FeedbackFooter activeTab={activeTab} />}
       </main>
 
       {/* Footer (Always displayed with Disqus Feedback thread) */}
